@@ -2,16 +2,14 @@ API routes
 
 | Route                         | HTTP Verb     |Response| Description                     |
 | -----------                   | -----------   | ------ |-----------                     |
-| `/createProject`              |     POST      |res.json| Create a new project            |
-| `/getAllProjects`             |     GET       |res.json|List of all projects            |
-| `/getOneProject/:project_id`  |     GET       |res.json|Details of a specific project   |   
-| `/editProject/:project_id`    |     PUT       |res.json|Update a specific project       |   
-| `/deleteProject/:project_id`  |     DELETE    |        |Delete a specific project       |   
-| `/createUser`                 |     POST      |res.json|Create a new user               |
-| `/getAllUsers`                |     GET       |res.json|List of all users               | 
-| `/getOneUser/:user_id`        |     GET       |res.json|Details of a specific user      | 
-| `/editUser/:user_id`          |     PUT       |res.json|Edit a new user                 |    
-| `/deleteUser/:user_id`        |     DELETE    |        |Delete a new user               |    
-
-//Preguntar a German sobre endpoints de usuario en la API
+| `/api/createProject`              |     POST      |'{project}'| Create a new project            |
+| `/api/getAllProjects`             |     GET       |'[{project}]'|List of all projects            |
+| `/api/getOneProject/:project_id`  |     GET       |'{project}'|Details of a specific project   |   
+| `/api/editProject/:project_id`    |     PUT       |'{project}'|Update a specific project       |   
+| `/api/deleteProject/:project_id`  |     DELETE    |        |Delete a specific project       |   
+| `/api/createUser`                 |     POST      |'{user}'|Create a new user               |
+| `/api/getAllUsers`                |     GET       |'[{user}]'|List of all users               | 
+| `/api/getOneUser/:user_id`        |     GET       |'{user}'|Details of a specific user      | 
+| `/api/editUser/:user_id`          |     PUT       |'{user}'|Edit a new user                 |    
+| `/api/deleteUser/:user_id`        |     DELETE    |        |Delete a new user               |    
 
