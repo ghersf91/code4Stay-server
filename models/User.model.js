@@ -33,8 +33,6 @@ const userSchema = new Schema(
       maxLength: 300,
     },
 
-
-
     projectTypeInterests: {
       type: [String],
       enum: ['FARM', 'NGO', 'SCHOOL', 'HOSTEL', 'CAMPING', 'OTHER'],
