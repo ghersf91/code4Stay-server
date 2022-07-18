@@ -12,15 +12,15 @@ const ratingSchema = new Schema(
 
     comment: {
       type: String,
-      maxLength: [400, 'The maximum length of reviews is 300 characters'],
+      maxLength: [400, 'The maximum length of reviews is 400 characters'],
     },
 
-    ratingReceiver: {
+    receiver: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
 
-    ratingGiver: {
+    giver: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },

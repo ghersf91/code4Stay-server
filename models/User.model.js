@@ -25,7 +25,7 @@ const userSchema = new Schema(
 
     profilePicture: {
       type: [String],
-      default: 'https://www.pngegg.com/en/png-xwkzm',
+      default: ['https://www.pngegg.com/en/png-xwkzm'],
     },
 
     bio: {
@@ -45,10 +45,10 @@ const userSchema = new Schema(
       enum: ['AMERICAS', 'EUROPE', 'AFRICA', 'ASIA', 'OCEANIA'],
     },
 
-    comments: {
+    comments: [{
       type: Schema.Types.ObjectId,
       ref: 'Rating',
-    }
+    }]
 
   },
   {

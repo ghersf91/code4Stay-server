@@ -22,7 +22,7 @@ const projectSchema = new Schema(
 
     hoursPerWeek: {
       type: Number,
-      max: 40,
+      max: [40, 'You must specify about the number of working hours per week'],
       required: [true, 'Please indicate how many hours per week volunteers are expected to work'],
     },
 
@@ -50,7 +50,7 @@ const projectSchema = new Schema(
     }],
 
     shelterType: {
-      type: String,
+      type: String
     },
 
     testimonials: {
