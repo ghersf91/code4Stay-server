@@ -4,17 +4,17 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: [true,'Username is required'],
+      required: [true, 'Username is required'],
     },
 
     email: {
       type: String,
-      required: [true,'Email is required'],
+      required: [true, 'Email is required'],
     },
 
     password: {
       type: String,
-      required: [true,'Password is required'],
+      required: [true, 'Password is required'],
     },
 
     role: {
@@ -33,10 +33,7 @@ const userSchema = new Schema(
       maxLength: 300,
     },
 
-    joinedProjects: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Project',
-    }],
+
 
     projectTypeInterests: {
       type: [String],
@@ -52,7 +49,7 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Rating',
     }
-    
+
   },
   {
     timestamps: true,
