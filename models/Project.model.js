@@ -6,7 +6,7 @@ const projectSchema = new Schema(
     site: {
       address: {
         type: String,
-        required: [true, 'Please include the site of your project'],
+        // required: [true, 'Please include the site of your project'],
       },
       location: {
         type: { type: String },
@@ -32,7 +32,7 @@ const projectSchema = new Schema(
       required: [true, 'Please include a description of the project and help needed'],
     },
 
-    minTimeWeeks: {
+    minWeeks: {
       type: Number,
       min: 1,
       default: 1,
@@ -65,7 +65,6 @@ const projectSchema = new Schema(
 
     languagesSpoken: {
       type: [String],
-      min: 1,
       required: [true, 'Please indicate what languages are spoken by the hosts']
     }
 
