@@ -17,7 +17,6 @@ const projectSchema = new Schema(
     projectType: {
       type: [String],
       enum: ['FARM', 'NGO', 'SCHOOL', 'HOSTEL', 'CAMPING', 'OTHER'],
-      required: [true, 'Please include the project type'],
     },
 
     hoursPerWeek: {
