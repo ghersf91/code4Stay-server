@@ -3,6 +3,12 @@ const { Schema, model } = require("mongoose");
 const projectSchema = new Schema(
   {
 
+    // projectName: {
+    //   type: String,
+    //   maxLength: 50,
+    //   required: [true, 'Please include the name of your project']
+    // },
+
     site: {
       address: {
         type: String,
