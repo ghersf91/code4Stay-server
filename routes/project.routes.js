@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Project = require('./../models/Project.model')
+const isAuthenticated = require('./../middlewares/jwt.middleware')
 
 router.get('/getAllProjects', (req, res, next) => {
 
@@ -18,12 +19,12 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/create', (req, res, next) => {
+router.post('/create', isAuthenticated, (req, res, next) => {
 
-    const newProject = req.body
+    const { _id: owner } = req.payload
 
     Project
-        .create(newProject)
+        .create(owner, ...req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

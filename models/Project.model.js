@@ -66,6 +66,10 @@ const projectSchema = new Schema(
     languagesSpoken: {
       type: [String],
       required: [true, 'Please indicate what languages are spoken by the hosts']
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
     }
 
   },
