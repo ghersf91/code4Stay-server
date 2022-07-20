@@ -21,11 +21,11 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 
 router.post('/create', isAuthenticated, (req, res, next) => {
 
-    const { _id: owner } = req.payload
-    console.log(req.payload)
-    console.log(owner)
+    const { _id } = req.payload
+    // console.log(req.payload)
+    console.log(_id)
     Project
-        .create({ owner, ...req.body })
+        .create({ owner: _id, ...req.body })
         .then(response => {
             console.log(response)
             res.json(response)
