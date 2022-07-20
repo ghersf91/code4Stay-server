@@ -19,14 +19,17 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/create', (req, res, next) => {
+router.post('/create', isAuthenticated, (req, res, next) => {
 
-    // const { _id: owner } = req.payload
-    // console.log(req.payload)
-
+    const { _id: owner } = req.payload
+    console.log(req.payload)
+    console.log(owner)
     Project
-        .create(req.body)
-        .then(response => res.json(response))
+        .create({ owner, ...req.body })
+        .then(response => {
+            console.log(response)
+            res.json(response)
+        })
         .catch(err => res.status(500).json(err))
 })
 
