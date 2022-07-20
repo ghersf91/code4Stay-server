@@ -25,8 +25,8 @@ const userSchema = new Schema(
     },
 
     profilePicture: {
-      type: [String],
-      default: ['https://www.pngegg.com/en/png-xwkzm'],
+      type: String,
+      default: 'https://www.pngegg.com/en/png-xwkzm',
     },
 
     bio: {
