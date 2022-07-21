@@ -33,6 +33,17 @@ router.post('/create', isAuthenticated, (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get('/edit/:project_id', (req, res, next) => {
+
+    const { project_id } = req.params
+
+
+    Project
+        .findById(project_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
 router.post('/edit/:project_id', (req, res, next) => {
 
     const { project_id } = req.params
