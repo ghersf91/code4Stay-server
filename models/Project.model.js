@@ -9,20 +9,14 @@ const projectSchema = new Schema(
       required: [true, 'Please include the name of your project']
     },
 
-    site: {
-      address: {
-        type: String,
-        // required: [true, 'Please include the site of your project'],
-      },
-      location: {
-        type: { type: String },
-        coordinates: [Number],
-      },
+    city: {
+      type: String,
+      required: [true, 'Please include the location of your project']
     },
 
-    projectType: {
-      type: [String],
-      enum: ['FARM', 'NGO', 'SCHOOL', 'HOSTEL', 'CAMPING', 'OTHER'],
+    country: {
+      type: String,
+      required: [true, 'Please include the location of your project']
     },
 
     hoursPerWeek: {
@@ -64,8 +58,8 @@ const projectSchema = new Schema(
     },
 
     gallery: {
-      type: [String],
-      default: ['https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/1362px-Placeholder_view_vector.svg.png?20220519031949'],
+      type: String,
+      default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/1362px-Placeholder_view_vector.svg.png?20220519031949',
     },
 
     languagesSpoken: {
