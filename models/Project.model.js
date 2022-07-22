@@ -9,6 +9,12 @@ const projectSchema = new Schema(
       required: [true, 'Please include the name of your project']
     },
 
+    projectType: {
+      type: String,
+      enum: ['NGO', 'Farm', 'Hostel', 'Camping', 'School', 'Other']
+
+    },
+
     city: {
       type: String,
       required: [true, 'Please include the location of your project']
