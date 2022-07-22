@@ -20,10 +20,8 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 })
 
 router.post('/create', isAuthenticated, (req, res, next) => {
-
     const { _id } = req.payload
-    // console.log(req.payload)
-    console.log(_id)
+
     Project
         .create({ owner: _id, ...req.body })
         .then(response => {
@@ -34,9 +32,7 @@ router.post('/create', isAuthenticated, (req, res, next) => {
 })
 
 router.get('/edit/:project_id', (req, res, next) => {
-
     const { project_id } = req.params
-
 
     Project
         .findById(project_id)
@@ -45,8 +41,8 @@ router.get('/edit/:project_id', (req, res, next) => {
 })
 
 router.post('/edit/:project_id', (req, res, next) => {
-
     const { project_id } = req.params
+
     const { projectType, hoursPerWeek, minWeeks, description,
         city, country, shelterType, gallery, mealsIncluded }
         = req.body

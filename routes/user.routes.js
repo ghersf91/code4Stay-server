@@ -1,7 +1,5 @@
 const router = require("express").Router()
-
 const User = require('./../models/User.model')
-
 
 router.get("/getAllUsers", (req, res) => {
 
@@ -11,9 +9,7 @@ router.get("/getAllUsers", (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-
 router.get("/getOneUser/:user_id", (req, res) => {
-
     const { user_id } = req.params
 
     User
@@ -21,7 +17,6 @@ router.get("/getOneUser/:user_id", (req, res) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
 
 router.post("/createUser", (req, res) => {
 
@@ -31,9 +26,7 @@ router.post("/createUser", (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-
 router.post("/editUser/:user_id", (req, res) => {
-
     const { user_id } = req.params
     const { username, password, role, profilePicture, bio, projectTypeInterests, locationInterests } = req.body
 
@@ -42,7 +35,6 @@ router.post("/editUser/:user_id", (req, res) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
 
 router.post("/deleteUser/:user_id", (req, res, next) => {
 
@@ -53,7 +45,5 @@ router.post("/deleteUser/:user_id", (req, res, next) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
-
 
 module.exports = router
