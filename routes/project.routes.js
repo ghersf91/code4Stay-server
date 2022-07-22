@@ -47,10 +47,14 @@ router.get('/edit/:project_id', (req, res, next) => {
 router.post('/edit/:project_id', (req, res, next) => {
 
     const { project_id } = req.params
-    const { projectType, hoursPerWeek, minWeeks, description, city, country, shelterType, gallery }
+    const { projectType, hoursPerWeek, minWeeks, description,
+        city, country, shelterType, gallery, mealsIncluded }
         = req.body
 
-    const newInfo = { projectType, hoursPerWeek, minWeeks, description, city, country, shelterType, gallery }
+    const newInfo = {
+        projectType, hoursPerWeek, minWeeks, description,
+        city, country, shelterType, gallery, mealsIncluded
+    }
 
     Project
         .findByIdAndUpdate(project_id, newInfo)
