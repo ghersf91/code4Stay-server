@@ -6,6 +6,7 @@ router.get('/getAllProjects', (req, res, next) => {
 
     Project
         .find()
+        // .select()
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -20,14 +21,11 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 })
 
 router.post('/create', isAuthenticated, (req, res, next) => {
-    const { _id } = req.payload
+    const { _id: owner } = req.payload
 
     Project
-        .create({ owner: _id, ...req.body })
-        .then(response => {
-            console.log(response)
-            res.json(response)
-        })
+        .create({ owner, ...req.body })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
@@ -40,7 +38,7 @@ router.get('/edit/:project_id', (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/edit/:project_id', (req, res, next) => {
+router.put('/edit/:project_id', (req, res, next) => {
     const { project_id } = req.params
 
     const { projectType, hoursPerWeek, minWeeks, description,
@@ -58,7 +56,7 @@ router.post('/edit/:project_id', (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('/delete/:project_id', (req, res, next) => {
+router.delete('/delete/:project_id', (req, res, next) => {
     const { project_id } = req.params
 
     Project

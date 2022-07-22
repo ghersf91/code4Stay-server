@@ -5,6 +5,7 @@ router.get("/getAllUsers", (req, res) => {
 
     User
         .find()
+        // .select()
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -26,7 +27,7 @@ router.post("/createUser", (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post("/editUser/:user_id", (req, res) => {
+router.put("/editUser/:user_id", (req, res) => {
     const { user_id } = req.params
     const { username, password, role, profilePicture, bio, projectTypeInterests, locationInterests } = req.body
 
@@ -36,7 +37,7 @@ router.post("/editUser/:user_id", (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post("/deleteUser/:user_id", (req, res, next) => {
+router.delete("/deleteUser/:user_id", (req, res, next) => {
 
     const { user_id } = req.params
 
