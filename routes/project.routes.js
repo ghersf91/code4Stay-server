@@ -36,12 +36,12 @@ router.put('/edit/:project_id', isAuthenticated, (req, res, next) => {
     const { project_id } = req.params
 
     const { projectType, hoursPerWeek, minWeeks, description,
-        city, country, shelterType, gallery, mealsIncluded }
+        city, country, latitude, longitude, shelterType, gallery, mealsIncluded }
         = req.body
 
     const newInfo = {
         projectType, hoursPerWeek, minWeeks, description,
-        city, country, shelterType, gallery, mealsIncluded
+        city, country, latitude, longitude, shelterType, gallery, mealsIncluded
     }
 
     Project

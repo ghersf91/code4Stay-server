@@ -25,6 +25,13 @@ const projectSchema = new Schema(
       required: [true, 'Please include the location of your project']
     },
 
+    location: {
+      type: {
+        type: String
+      },
+      coordinates: [Number]
+    },
+
     hoursPerWeek: {
       type: Number,
       max: [40, 'You must specify about the number of working hours per week'],
@@ -84,6 +91,10 @@ const projectSchema = new Schema(
     timestamps: true,
   }
 );
+
+
+
+projectSchema.index({ location: "2dsphere" })
 
 const Project = model("Project", projectSchema);
 
