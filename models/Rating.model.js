@@ -16,7 +16,7 @@ const ratingSchema = new Schema(
 
     receiver: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Project',
     },
 
     giver: {

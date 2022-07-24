@@ -58,10 +58,12 @@ const projectSchema = new Schema(
       type: String
     },
 
-    testimonials: {
-      type: Schema.Types.ObjectId,
-      ref: 'Rating',
-    },
+    testimonials: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Rating',
+      }
+    ],
 
     gallery: {
       type: String,

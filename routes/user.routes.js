@@ -32,7 +32,10 @@ router.put("/editUser/:user_id", (req, res) => {
     const { username, password, role, profilePicture, bio, projectTypeInterests, locationInterests } = req.body
 
     User
-        .findByIdAndUpdate(user_id, { username, password, role, profilePicture, bio, projectTypeInterests, locationInterests })
+        .findByIdAndUpdate(user_id, {
+            username, password, role,
+            profilePicture, bio, projectTypeInterests, locationInterests
+        }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

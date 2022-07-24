@@ -16,6 +16,7 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 
     Project
         .findById(project_id)
+        .populate('testimonials')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -31,7 +32,7 @@ router.post('/create', isAuthenticated, (req, res, next) => {
 
 
 
-router.put('/edit/:project_id', (req, res, next) => {
+router.put('/edit/:project_id', isAuthenticated, (req, res, next) => {
     const { project_id } = req.params
 
     const { projectType, hoursPerWeek, minWeeks, description,
@@ -44,7 +45,17 @@ router.put('/edit/:project_id', (req, res, next) => {
     }
 
     Project
-        .findByIdAndUpdate(project_id, newInfo)
+        .findByIdAndUpdate(project_id, newInfo, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+router.put('/join/:project_id', isAuthenticated, (req, res, next) => {
+    const { project_id } = req.params
+    const { _id } = req.payload
+
+    Project
+        .findByIdAndUpdate(project_id, { $push: { joiners: _id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
