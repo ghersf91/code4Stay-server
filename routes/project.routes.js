@@ -27,13 +27,14 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 router.post('/create', isAuthenticated, (req, res, next) => {
     console.log(req.body)
     const { projectType, hoursPerWeek, minWeeks, description,
-        city, country, latitude, longitude, shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName } = req.body
+        city, country, continent, latitude, longitude,
+        shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName } = req.body
     const { _id: owner } = req.payload
 
     Project
         .create({
             owner, projectType, hoursPerWeek, minWeeks, description,
-            city, country, location: { type: 'Point', coordinates: [latitude, longitude] },
+            city, country, continent, location: { type: 'Point', coordinates: [latitude, longitude] },
             shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName
         })
         .then(response => {
@@ -42,7 +43,7 @@ router.post('/create', isAuthenticated, (req, res, next) => {
                 .populate('owned')
         })
         .then(newUser => res.json(newUser))
-        .catch(err => console.log(err))
+        .catch(err => res.status(500).json(err))
 })
 
 
@@ -51,12 +52,13 @@ router.put('/edit/:project_id', isAuthenticated, (req, res, next) => {
     const { project_id } = req.params
 
     const { projectType, hoursPerWeek, minWeeks, description,
-        city, country, latitude, longitude, shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName } = req.body
+        city, country, continent, latitude, longitude, shelterType,
+        gallery, mealsIncluded, languagesSpoken, testimonials, projectName } = req.body
         = req.body
 
     const newInfo = {
         projectType, hoursPerWeek, minWeeks, description,
-        city, country, location: { type: 'Point', coordinates: [latitude, longitude] }
+        city, country, continent, location: { type: 'Point', coordinates: [latitude, longitude] }
     }
 
     Project

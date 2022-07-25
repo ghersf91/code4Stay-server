@@ -4,6 +4,8 @@ router.use('/users', require('./user.routes'))
 
 router.use('/projects', require('./project.routes'))
 
+router.use('/search', require('./search.routes'))
+
 router.use('/auth', require('./auth.routes'))
 
 router.use('/upload', require('./upload.routes'))

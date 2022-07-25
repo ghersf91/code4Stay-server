@@ -14,6 +14,10 @@ const projectSchema = new Schema(
       enum: ['NGO', 'Farm', 'Hostel', 'Camping', 'School', 'Other']
 
     },
+    continent: {
+      type: String,
+      required: [true, 'Please include the location of your project']
+    },
 
     city: {
       type: String,
