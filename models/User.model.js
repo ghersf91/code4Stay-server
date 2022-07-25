@@ -47,6 +47,14 @@ const userSchema = new Schema(
     comments: [{
       type: Schema.Types.ObjectId,
       ref: 'Rating',
+    }],
+    requests: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    }],
+    owned: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Project',
     }]
 
   },

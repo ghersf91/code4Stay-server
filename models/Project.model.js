@@ -61,6 +61,7 @@ const projectSchema = new Schema(
       ref: 'User',
     }],
 
+
     shelterType: {
       type: String
     },

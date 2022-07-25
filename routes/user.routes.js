@@ -15,6 +15,7 @@ router.get("/getOneUser/:user_id", (req, res) => {
 
     User
         .findById(user_id)
+        .populate('requests comments')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

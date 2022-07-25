@@ -1,6 +1,9 @@
 const router = require("express").Router();
+const mongoose = require('mongoose');
+var ObjectId = require('mongodb').ObjectId;
 const Project = require('./../models/Project.model')
-const { isAuthenticated } = require("../middlewares/jwt.middleware")
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
+const User = require("../models/User.model");
 
 router.get('/getAllProjects', (req, res, next) => {
 
@@ -30,9 +33,15 @@ router.post('/create', isAuthenticated, (req, res, next) => {
     Project
         .create({
             owner, projectType, hoursPerWeek, minWeeks, description,
-            city, country, location: { type: 'Point', coordinates: [latitude, longitude] }, shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName
+            city, country, location: { type: 'Point', coordinates: [latitude, longitude] },
+            shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName
         })
-        .then(response => res.json(response))
+        .then(response => {
+            return User
+                .findByIdAndUpdate(owner, { $push: { owned: response._id } })
+                .populate('owned')
+        })
+        .then(newUser => res.json(newUser))
         .catch(err => console.log(err))
 })
 
@@ -56,13 +65,40 @@ router.put('/edit/:project_id', isAuthenticated, (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/join/:project_id', isAuthenticated, (req, res, next) => {
+router.put('/details/:project_id', isAuthenticated, (req, res, next) => {
     const { project_id } = req.params
     const { _id } = req.payload
-
+    console.log(project_id)
     Project
-        .findByIdAndUpdate(project_id, { $push: { joiners: _id } }, { new: true })
-        .then(response => res.json(response))
+        .findById(project_id)
+        .then(response => {
+            const user_id = response.owner
+            console.log(user_id)
+            return User.findByIdAndUpdate(user_id, { $push: { requests: _id } })
+        })
+        .then(updatedUser => {
+            res.json(updatedUser)
+        })
+        .catch(err => res.status(500).json(err))
+})
+
+router.put('/join/:user_id', isAuthenticated, (req, res, next) => {
+    const { user_id } = req.params
+    const { _id } = req.payload
+    User
+        .findByIdAndUpdate(_id, { $pull: { requests: user_id } })
+        .populate('owned')
+        .then(response => {
+            const project = response.owned.filter(e => e._id !== user_id)
+            const project_id = project.length < 2 && project[0]._id
+            const id = mongoose.Types.ObjectId(user_id)
+            console.log('--------------------------', project_id)
+            return Project.findByIdAndUpdate(project_id, { $push: { joiners: id } })
+        })
+        .then(newProject => {
+            console.log('-------------------', newProject)
+            res.json(newProject)
+        })
         .catch(err => res.status(500).json(err))
 })
 
