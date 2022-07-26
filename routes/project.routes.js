@@ -70,13 +70,12 @@ router.put('/edit/:project_id', isAuthenticated, (req, res, next) => {
 router.put('/details/:project_id', isAuthenticated, (req, res, next) => {
     const { project_id } = req.params
     const { _id } = req.payload
-    console.log(project_id)
+
     Project
         .findById(project_id)
         .then(response => {
-            const user_id = response.owner
-            console.log(user_id)
-            return User.findByIdAndUpdate(user_id, { $push: { requests: _id } })
+            const { owner } = response
+            return User.findByIdAndUpdate(owner, { $push: { requests: _id } })
         })
         .then(updatedUser => {
             res.json(updatedUser)
@@ -85,17 +84,17 @@ router.put('/details/:project_id', isAuthenticated, (req, res, next) => {
 })
 
 router.put('/join/:user_id', isAuthenticated, (req, res, next) => {
-    const { user_id } = req.params
+    const { user_id: requests } = req.params
     const { _id } = req.payload
     User
-        .findByIdAndUpdate(_id, { $pull: { requests: user_id } })
+        .findByIdAndUpdate(_id, { $pull: { requests } })
         .populate('owned')
         .then(response => {
             const project = response.owned.filter(e => e._id !== user_id)
             const project_id = project.length < 2 && project[0]._id
-            const id = mongoose.Types.ObjectId(user_id)
+            const joiners = mongoose.Types.ObjectId(user_id)
             console.log('--------------------------', project_id)
-            return Project.findByIdAndUpdate(project_id, { $push: { joiners: id } })
+            return Project.findByIdAndUpdate(project_id, { $push: { joiners } })
         })
         .then(newProject => {
             console.log('-------------------', newProject)
