@@ -78,8 +78,7 @@ const projectSchema = new Schema(
     ],
 
     gallery: {
-      type: String,
-      default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/1362px-Placeholder_view_vector.svg.png?20220519031949',
+      type: [String],
     },
 
     languagesSpoken: {
