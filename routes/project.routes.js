@@ -9,7 +9,7 @@ router.get('/getAllProjects', (req, res, next) => {
 
     Project
         .find()
-        // .select()
+        .select({ gallery: 1, projectName: 1, city: 1, country: 1, description: 1, location: 1, owner: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
