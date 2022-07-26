@@ -12,12 +12,11 @@ router.post('/image', uploader.single('imageData'), (req, res) => {
 })
 
 router.post('/multipleImages', uploader.array('multipleImagesData'), (req, res) => {
-    if (!req.file) {
+    if (!req.files) {
         res.status(500).json({ errorMessage: 'Mistake loading the files' })
         return
     }
-    res.json({ cloudinary_url: req.files.path })
-
+    res.json({ cloudinary_urls: req.files.map(res => res.path) })
 })
 
 module.exports = router
