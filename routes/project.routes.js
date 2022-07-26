@@ -25,7 +25,7 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 })
 
 router.post('/create', isAuthenticated, (req, res, next) => {
-    console.log(req.body)
+    console.log('--------', req.body)
     const { projectType, hoursPerWeek, minWeeks, description,
         city, country, continent, latitude, longitude,
         shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName } = req.body
@@ -43,7 +43,7 @@ router.post('/create', isAuthenticated, (req, res, next) => {
                 .populate('owned')
         })
         .then(newUser => res.json(newUser))
-        .catch(err => res.status(500).json(err))
+        .catch(err => console.log(err))
 })
 
 
