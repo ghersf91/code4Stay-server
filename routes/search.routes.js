@@ -5,7 +5,7 @@ router.get('/:continent', (req, res, next) => {
     const { continent } = req.params
 
     Project
-        .find({ continent: continent })
+        .find({ continent })
         .then(response => {
             console.log(response)
             res.json(response)
