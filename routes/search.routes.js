@@ -16,9 +16,11 @@ router.get('/:continent', (req, res, next) => {
 router.get('/filter', (req, res, next) => {
 
     const { from_to } = req.query
-    console.log(from_to)
+
+    console.log(req.query)
+
     Project
-        .find({ 'city': new RegExp(from_to, 'i') })
+        .find({ 'projectName': new RegExp('from_to', "i") })
         .then((data) => {
             console.log(data)
             res.json(data)
