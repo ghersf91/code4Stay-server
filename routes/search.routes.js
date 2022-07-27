@@ -14,13 +14,14 @@ router.get('/:continent', (req, res, next) => {
 })
 
 router.get('/filter', (req, res, next) => {
-    const { from_to } = req.query
 
+    const { from_to } = req.query
+    console.log(from_to)
     Project
-        .find({ 'projectName': new RegExp(from_to, 'i') })
-        .then(response => {
-            console.log(response)
-            res.json(response)
+        .find({ 'city': new RegExp(from_to, 'i') })
+        .then((data) => {
+            console.log(data)
+            res.json(data)
         })
         .catch(err => res.status(500).json(err))
 })
