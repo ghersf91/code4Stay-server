@@ -21,7 +21,10 @@ router.post("/createRating/:project_id", (req, res) => {
     Rating
         .create(req.body)
         .then(response => {
-            return Project.findByIdAndUpdate(project_id, { $push: { testimonials: response._id } }, { new: true })
+            return Project
+                .findByIdAndUpdate(project_id, { $push: { testimonials: response._id } }, { new: true })
+                .populate('testimonials')
+
         })
         .then(newTestimonials => res.json(newTestimonials))
         .catch(err => res.status(500).json(err))

@@ -27,7 +27,10 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
                 model: 'User'
             }
         })
-        .then(response => res.json(response))
+        .then(response => {
+            console.log(response)
+            res.json(response)
+        })
         .catch(err => res.status(500).json(err))
 })
 
