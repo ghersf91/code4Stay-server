@@ -4,6 +4,7 @@ var ObjectId = require('mongodb').ObjectId;
 const Project = require('./../models/Project.model')
 const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const User = require("../models/User.model");
+const Rating = require("../models/Rating.model")
 
 router.get('/getAllProjects', (req, res, next) => {
 
@@ -19,7 +20,13 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 
     Project
         .findById(project_id)
-        .populate('testimonials')
+        .populate({
+            path: 'testimonials',
+            populate: {
+                path: 'giver',
+                model: 'User'
+            }
+        })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
