@@ -5,7 +5,7 @@ router.get("/getAllUsers", (req, res) => {
 
     User
         .find()
-        // .select()
+        .select({ username: 1, profilePicture: 1, bio: 1, email: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
