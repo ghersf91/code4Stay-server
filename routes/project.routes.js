@@ -27,10 +27,7 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
                 model: 'User'
             }
         })
-        .then(response => {
-            console.log(response)
-            res.json(response)
-        })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
@@ -103,11 +100,9 @@ router.put('/join/:user_id', isAuthenticated, (req, res, next) => {
             const project = response.owned.filter(e => e._id !== user_id)
             const project_id = project.length < 2 && project[0]._id
             const joiners = mongoose.Types.ObjectId(user_id)
-            console.log('--------------------------', project_id)
             return Project.findByIdAndUpdate(project_id, { $push: { joiners } })
         })
         .then(newProject => {
-            console.log('-------------------', newProject)
             res.json(newProject)
         })
         .catch(err => res.status(500).json(err))

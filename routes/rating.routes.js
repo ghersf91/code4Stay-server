@@ -7,10 +7,7 @@ router.get('/getRatings/:project_id', (req, res, next) => {
 
     Rating
         .find({ receiver: project_id })
-        .then(response => {
-            console.log(response)
-            res.json(response)
-        })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 
