@@ -108,6 +108,15 @@ router.put('/join/:user_id', isAuthenticated, (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.put('/deny/:user_id', isAuthenticated, (req, res, next) => {
+    const { user_id: requests } = req.params
+    const { _id } = req.payload
+    User
+        .findByIdAndUpdate(_id, { $pull: { requests } })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
 router.delete('/delete/:project_id', (req, res, next) => {
     const { project_id } = req.params
 

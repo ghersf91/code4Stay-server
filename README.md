@@ -14,7 +14,7 @@ API routes
 | `/api/users/deleteUser/:user_id`        |     DELETE    |        |Delete a new user                  |   
 | `/api/ratings/getRatings/:project_id`   |     GET       |'[{rating}]'|gets Ratings for project       |
 | `/api/ratings/createRating/:project_id` |     POST      |'{rating}'|Create a new rating              |
-| `/api/search//:continent`               |     GET       |'[{project}]'|gets projects from continent  |
-| `/api/search//filter`                   |     GET       |'[{project}]'|Filters projects by name      |
+| `/api/search/:continent`               |     GET       |'[{project}]'|gets projects from continent  |
+| `/api/search/filter`                   |     GET       |'[{project}]'|Filters projects by name      |
 
 
