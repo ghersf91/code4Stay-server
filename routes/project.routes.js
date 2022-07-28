@@ -32,7 +32,6 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 })
 
 router.post('/create', isAuthenticated, (req, res, next) => {
-    console.log('--------', req.body)
     const { projectType, hoursPerWeek, minWeeks, description,
         city, country, continent, latitude, longitude,
         shelterType, gallery, mealsIncluded, languagesSpoken, testimonials, projectName } = req.body
