@@ -30,13 +30,18 @@ router.post('/signup', (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            return User.create({ email, password: hashedPassword, username })
-        })
-        .then((createdUser) => {
-            const { email, username, _id } = createdUser
-            const user = { email, username, _id }
+            User
+                .create({ email, password: hashedPassword, username })
+                .then((createdUser) => {
+                    const { email, username, _id } = createdUser
+                    const user = { email, username, _id }
 
-            res.status(201).json({ user })
+                    res.status(201).json({ user })
+                })
+                .catch(err => {
+                    console.log(err)
+                    res.status(500).json({ message: 'Internal Server Error' })
+                })
         })
         .catch(err => {
             console.log(err)
