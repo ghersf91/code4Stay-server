@@ -10,16 +10,5 @@ router.get('/:continent', (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/filter', (req, res, next) => {
-
-    const { from_to } = req.query
-
-    Project
-        .find({ 'projectName': new RegExp('from_to', "i") })
-        .then((data) => {
-            res.json(data)
-        })
-        .catch(err => res.status(500).json(err))
-})
 
 module.exports = router
