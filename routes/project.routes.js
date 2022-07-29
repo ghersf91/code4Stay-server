@@ -20,6 +20,7 @@ router.get('/getOneProject/:project_id', (req, res, next) => {
 
     Project
         .findById(project_id)
+        .populate('owner')
         .populate({
             path: 'testimonials',
             populate: {
